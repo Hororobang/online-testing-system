@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>{{ test.title }}</h2>
+
+    <form method="POST">
+
+        {% for question in questions %}
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h5>{{ loop.index }}. {{ question }}</h5>
+
+                <input
+                    type="text"
+                    name="q{{ loop.index0 }}"
+                    class="form-control"
+                    required>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <button
+            type="submit"
+            class="btn btn-success">
+
+            Завершить тест
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

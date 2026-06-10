@@ -152,53 +152,135 @@ def take_test(test_id):
     test = Test.query.get_or_404(test_id)
 
     questions = {
-        1: [
-            "Что выводит print(type([]))?",
-            "Какая структура данных изменяемая?",
-            "Для чего используется def?",
-            "Что делает цикл for?",
-            "Что такое list?",
-            "Что возвращает input()?",
-            "Для чего нужен try/except?",
-            "Как получить длину списка?",
-            "Что такое dict?",
-            "Что такое модуль?"
-        ],
-        2: [
-            "Для чего нужен тег <head>?",
-            "Как создать ссылку?",
-            "Как вставить изображение?",
-            "Для чего нужен <div>?",
-            "Что такое HTML?",
-            "Как создать форму?",
-            "Для чего нужен <input>?",
-            "Что делает тег <table>?",
-            "Что такое атрибут class?",
-            "Что такое CSS?"
-        ],
-        3: [
-            "Что делает SELECT?",
-            "Для чего нужен WHERE?",
-            "Что такое PRIMARY KEY?",
-            "Что делает INSERT?",
-            "Что делает UPDATE?",
-            "Что делает DELETE?",
-            "Для чего нужен JOIN?",
-            "Что такое база данных?",
-            "Что делает ORDER BY?",
-            "Что такое SQL?"
-        ]
-    }
+    1: [
+        {
+            "question": "Найдите значение выражения: 2² + 3²",
+            "options": ["10", "12", "13", "15"],
+            "correct": "13"
+        },
+        {
+            "question": "Решите уравнение: x + 7 = 15",
+            "options": ["6", "7", "8", "9"],
+            "correct": "8"
+        },
+        {
+            "question": "Чему равен корень из 144?",
+            "options": ["10", "11", "12", "13"],
+            "correct": "12"
+        },
+        {
+            "question": "Сколько процентов составляет 50 от 200?",
+            "options": ["20%", "25%", "30%", "40%"],
+            "correct": "25%"
+        },
+        {
+            "question": "Найдите площадь прямоугольника со сторонами 5 и 8.",
+            "options": ["13", "26", "40", "80"],
+            "correct": "40"
+        },
+        {
+            "question": "Чему равен синус 30°?",
+            "options": ["0", "0.5", "1", "2"],
+            "correct": "0.5"
+        },
+        {
+            "question": "Решите: 3x = 21",
+            "options": ["5", "6", "7", "8"],
+            "correct": "7"
+        },
+        {
+            "question": "Найдите среднее арифметическое чисел 4, 6 и 8.",
+            "options": ["5", "6", "7", "8"],
+            "correct": "6"
+        },
+        {
+            "question": "Чему равен cos(0°)?",
+            "options": ["0", "0.5", "1", "-1"],
+            "correct": "1"
+        },
+        {
+            "question": "Сколько будет 15 × 6?",
+            "options": ["75", "80", "90", "95"],
+            "correct": "90"
+        }
+    ],
+
+    2: [
+        {
+            "question": "Как вывести текст на экран в Python?",
+            "options": ["echo()", "print()", "show()", "output()"],
+            "correct": "print()"
+        },
+        {
+            "question": "Как называется переменная в Python?",
+            "options": ["name = 'Tom'", "var Tom", "string Tom", "Tom := name"],
+            "correct": "name = 'Tom'"
+        },
+        {
+            "question": "Как получить ввод пользователя?",
+            "options": ["scan()", "input()", "read()", "enter()"],
+            "correct": "input()"
+        },
+        {
+            "question": "Какой тип данных хранит текст?",
+            "options": ["int", "bool", "str", "list"],
+            "correct": "str"
+        },
+        {
+            "question": "Какой тип данных хранит целые числа?",
+            "options": ["str", "int", "float", "list"],
+            "correct": "int"
+        },
+        {
+            "question": "Как создать список?",
+            "options": ["{}", "()", "[]", "<>"],
+            "correct": "[]"
+        },
+        {
+            "question": "Какой цикл используется для перебора элементов?",
+            "options": ["while", "for", "repeat", "loop"],
+            "correct": "for"
+        },
+        {
+            "question": "Как обозначается комментарий?",
+            "options": ["//", "#", "/*", "--"],
+            "correct": "#"
+        },
+        {
+            "question": "Что вернёт len([1,2,3])?",
+            "options": ["2", "3", "4", "Ошибка"],
+            "correct": "3"
+        },
+        {
+            "question": "Для чего используется if?",
+            "options": [
+                "Для импорта",
+                "Для условия",
+                "Для списка",
+                "Для функции"
+            ],
+            "correct": "Для условия"
+        }
+    ]
+}
 
     if request.method == "POST":
 
         score = 0
 
-        for i in range(10):
-            answer = request.form.get(f"q{i}")
+        current_questions = questions.get(test_id, [])
 
-            if answer:
+        for i, q in enumerate(current_questions):
+
+            answer = request.form.get(f"q{i}")
+            print("QUESTION", i)
+            print("USER ANSWER =", answer)
+            print("CORRECT =", q["correct"])
+
+            if answer == q["correct"]:
                 score += 10
+
+        
 
         result = Result(
             user_id=current_user.id,

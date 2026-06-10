@@ -4,39 +4,66 @@
 
 <div class="container mt-4">
 
-    <h2>{{ test.title }}</h2>
+    <div class="card shadow-lg">
 
-    <form method="POST">
+        <div class="card-body">
 
-        {% for question in questions %}
+            <h2 class="mb-4">
+                {{ test.title }}
+            </h2>
 
-        <div class="card mb-3">
+            <form method="POST">
 
-            <div class="card-body">
+                {% for question in questions %}
 
-                <h5>{{ loop.index }}. {{ question }}</h5>
+                {% set q_index = loop.index0 %}
 
-                <input
-                    type="text"
-                    name="q{{ loop.index0 }}"
-                    class="form-control"
-                    required>
+                <div class="card mb-3">
 
-            </div>
+                    <div class="card-body">
+
+                        <h5>
+                            {{ loop.index }}. {{ question.question }}
+                        </h5>
+
+                        {% for option in question.options %}
+
+                        <div class="form-check mt-2">
+
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="q{{ q_index }}"
+                                value="{{ option }}"
+                                required>
+
+                            <label class="form-check-label">
+                                {{ option }}
+                            </label>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+                <button
+                    type="submit"
+                    class="btn btn-success btn-lg">
+
+                    Завершить тест
+
+                </button>
+
+            </form>
 
         </div>
 
-        {% endfor %}
-
-        <button
-            type="submit"
-            class="btn btn-success">
-
-            Завершить тест
-
-        </button>
-
-    </form>
+    </div>
 
 </div>
 

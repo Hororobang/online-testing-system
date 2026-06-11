@@ -2,18 +2,200 @@
 
 {% block content %}
 
-<h1>Система онлайн-тестирования</h1>
+<style>
 
-<p>
-Дипломный проект Ковалевского Степана Витальевича
-</p>
+.hero{
+    min-height: 85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #2563eb
+    );
+    color:white;
+    text-align:center;
+    border-radius:25px;
+    margin-top:20px;
+    position:relative;
+    overflow:hidden;
+}
 
-<a href="/login" class="btn btn-primary">
-Вход
-</a>
+.hero::before{
+    content:'';
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:rgba(255,255,255,0.08);
+    border-radius:50%;
+    top:-250px;
+    right:-150px;
+}
 
-<a href="/register" class="btn btn-success">
-Регистрация
-</a>
+.hero::after{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(255,255,255,0.05);
+    border-radius:50%;
+    bottom:-250px;
+    left:-150px;
+}
+
+.hero-content{
+    z-index:2;
+    animation:fadeUp 1s ease;
+}
+
+.hero h1{
+    font-size:4rem;
+    font-weight:700;
+}
+
+.hero p{
+    font-size:1.2rem;
+    opacity:0.9;
+}
+
+.btn-custom{
+    padding:15px 35px;
+    border-radius:50px;
+    font-size:18px;
+    transition:0.4s;
+}
+
+.btn-custom:hover{
+    transform:translateY(-5px);
+}
+
+.stats-card{
+    border:none;
+    border-radius:20px;
+    transition:.4s;
+}
+
+.stats-card:hover{
+    transform:translateY(-10px);
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+<div class="hero">
+
+```
+<div class="hero-content">
+
+    <h1>
+        🎓 Online Testing
+    </h1>
+
+    <p class="mt-3 mb-4">
+        Современная система онлайн-тестирования
+        для проверки знаний по математике
+        и информатике.
+    </p>
+
+    <a href="/login"
+       class="btn btn-light btn-lg btn-custom me-3">
+
+        Войти
+
+    </a>
+
+    <a href="/register"
+       class="btn btn-primary btn-lg btn-custom">
+
+        Регистрация
+
+    </a>
+
+</div>
+```
+
+</div>
+
+<div class="container mt-5">
+
+```
+<div class="row text-center">
+
+    <div class="col-md-4">
+
+        <div class="card shadow stats-card">
+
+            <div class="card-body">
+
+                <h1>📚</h1>
+
+                <h4>Тестирование</h4>
+
+                <p>
+                    Проверка знаний по предметам.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow stats-card">
+
+            <div class="card-body">
+
+                <h1>📊</h1>
+
+                <h4>Результаты</h4>
+
+                <p>
+                    Автоматический подсчёт баллов.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow stats-card">
+
+            <div class="card-body">
+
+                <h1>🏆</h1>
+
+                <h4>Достижения</h4>
+
+                <p>
+                    Отслеживание прогресса обучения.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</div>
 
 {% endblock %}

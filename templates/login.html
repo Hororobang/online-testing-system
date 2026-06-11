@@ -2,25 +2,109 @@
 
 {% block content %}
 
-<h2>Вход</h2>
+<div class="container">
 
-<form method="POST">
+    <div class="row justify-content-center mt-5">
 
-<input
-class="form-control mb-2"
-name="email"
-placeholder="Email">
+        <div class="col-md-5">
 
-<input
-class="form-control mb-2"
-type="password"
-name="password"
-placeholder="Пароль">
+            <div class="card shadow-lg border-0">
 
-<button class="btn btn-primary">
-Войти
-</button>
+                <div class="card-body p-5">
 
-</form>
+                    <h2 class="text-center mb-4">
+                        🔐 Вход в систему
+                    </h2>
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Пароль
+                            </label>
+
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100">
+
+                            Войти
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center">
+
+                        Нет аккаунта?
+
+                        <a href="/register">
+                            Зарегистрироваться
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+body{
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+    min-height:100vh;
+}
+
+.card{
+    border-radius:20px;
+    animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
 
 {% endblock %}

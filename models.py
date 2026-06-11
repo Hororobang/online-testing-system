@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-
+from datetime import datetime
 db = SQLAlchemy()
 
 class User(UserMixin, db.Model):
@@ -47,21 +47,16 @@ class Test(db.Model):
 
 
 class Result(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+    user_id = db.Column(db.Integer)
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("user.id")
-    )
+    score = db.Column(db.Integer)
 
-    score = db.Column(
-        db.Integer
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
     )
- 
 class Question(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)

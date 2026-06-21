@@ -335,7 +335,148 @@ if __name__ == "__main__":
             )
 
             db.session.commit()
+@app.route("/test/python", methods=["GET", "POST"])
+@login_required
+def python_test():
 
+    questions = [
+        {
+            "question": "Как вывести текст в Python?",
+            "options": ["print()", "echo()", "show()", "write()"],
+            "correct": "print()"
+        },
+        {
+            "question": "Какой тип данных хранит текст?",
+            "options": ["int", "str", "bool", "list"],
+            "correct": "str"
+        },
+        {
+            "question": "Как создать список?",
+            "options": ["{}", "[]", "()", "<>"],
+            "correct": "[]"
+        }
+    ]
 
+    if request.method == "POST":
+
+        score = 0
+
+        for i, q in enumerate(questions):
+
+            answer = request.form.get(f"q{i}")
+
+            if answer == q["correct"]:
+                score += 100 // len(questions)
+
+        result = Result(
+            user_id=current_user.id,
+            score=score
+        )
+
+        db.session.add(result)
+        db.session.commit()
+
+        return redirect(url_for("results"))
+
+    return render_template(
+        "subject_test.html",
+        title="Тест по Python",
+        questions=questions
+    )
+
+@app.route("/test/html", methods=["GET", "POST"])
+@login_required
+def html_test():
+
+    questions = [
+        {
+            "question": "Какой тег создаёт ссылку?",
+            "options": ["<a>", "<link>", "<href>", "<url>"],
+            "correct": "<a>"
+        },
+        {
+            "question": "Как вставить изображение?",
+            "options": ["<img>", "<image>", "<pic>", "<src>"],
+            "correct": "<img>"
+        }
+    ]
+
+    if request.method == "POST":
+
+        score = 0
+
+        for i, q in enumerate(questions):
+            answer = request.form.get(f"q{i}")
+
+            if answer == q["correct"]:
+                score += 100 // len(questions)
+
+        result = Result(
+            user_id=current_user.id,
+            score=score
+        )
+
+        db.session.add(result)
+        db.session.commit()
+
+        return redirect(url_for("results"))
+
+    return render_template(
+        "subject_test.html",
+        title="Тест по HTML & CSS",
+        questions=questions
+    )
+@app.route("/test/sql", methods=["GET", "POST"])
+@login_required
+def sql_test():
+
+    questions = [
+        {
+            "question": "Что делает SELECT?",
+            "options": [
+                "Удаляет данные",
+                "Выбирает данные",
+                "Изменяет данные",
+                "Создаёт таблицу"
+            ],
+            "correct": "Выбирает данные"
+        },
+        {
+            "question": "Для чего нужен WHERE?",
+            "options": [
+                "Фильтрация",
+                "Сортировка",
+                "Удаление",
+                "Создание"
+            ],
+            "correct": "Фильтрация"
+        }
+    ]
+
+    if request.method == "POST":
+
+        score = 0
+
+        for i, q in enumerate(questions):
+            answer = request.form.get(f"q{i}")
+
+            if answer == q["correct"]:
+                score += 100 // len(questions)
+
+        result = Result(
+            user_id=current_user.id,
+            score=score
+        )
+
+        db.session.add(result)
+        db.session.commit()
+
+        return redirect(url_for("results"))
+
+    return render_template(
+        "subject_test.html",
+        title="Тест по SQL",
+        questions=questions
+    )
 if __name__ == "__main__":
     app.run(debug=True)
